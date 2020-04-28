@@ -2,7 +2,7 @@
 
 [![pub package](https://img.shields.io/pub/v/multiple_localization)](https://pub.dartlang.org/packages/multiple_localization)
 
-Support for multiple abr and messages localization files for (intl)[https://pub.dev/packages/intl] package.
+Support for multiple abr and messages localization files for [intl](https://pub.dev/packages/intl) package.
 
 ## Problem
 
@@ -28,8 +28,7 @@ Than use `MultipleLocalizations.load` for your delegate load function, instead o
 ### Example
 
 ```dart
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
