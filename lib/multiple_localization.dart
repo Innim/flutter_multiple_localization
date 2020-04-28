@@ -1,0 +1,1 @@
+library multiple_localization;
