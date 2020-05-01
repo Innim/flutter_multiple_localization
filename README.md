@@ -11,7 +11,7 @@ then you have a problem. Intl doesn't allow multiple `initializeMessages` calls.
 first one will be processed and only it's messages will be used. Every calls after the first one
 will be ignored.
 
-*Why we need have multiple arb files?*
+**Why do we need to have multiple arb files?**
 
 In common scenario - we don't. Just put all localization string in single file and enjoy.
 But if you want to add intl localization with arb files to separate package, and than use

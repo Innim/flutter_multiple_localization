@@ -1,0 +1,13 @@
+{
+  "@@last_modified": "2020-05-01T19:28:31.257002",
+  "messageFromPackage": "Translated Message from Package",
+  "@messageFromPackage": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "messageFromPackageForOverride": "Translated Message from Package for override",
+  "@messageFromPackageForOverride": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

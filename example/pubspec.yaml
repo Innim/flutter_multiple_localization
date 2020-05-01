@@ -1,0 +1,12 @@
+name: multiple_localization_example
+description: Demonstrates how to use the multiple_localization plugin.
+
+dependencies:
+  flutter:
+    sdk: flutter
+  multiple_localization:
+    path: ../
+  intl: ^0.16.0
+
+dev_dependencies:
+  intl_translation: ^0.17.7

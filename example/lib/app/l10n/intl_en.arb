@@ -1,0 +1,18 @@
+{
+  "@@last_modified": "2020-05-01T19:28:01.282375",
+  "title": "Multiple localization",
+  "@title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "messageFromApp": "Translated Message from App",
+  "@messageFromApp": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "messageFromPackageForOverride": "This translation override package translation",
+  "@messageFromPackageForOverride": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

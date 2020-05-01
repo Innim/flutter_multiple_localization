@@ -46,7 +46,6 @@ class MultipleLocalizations {
   static _MultipleLocalizationLookup _lookup;
 
   static void _init() {
-    print('MultipleLocalizations _init');
     assert(intl_private.messageLookup is intl_private.UninitializedLocaleData);
     _lookup = _MultipleLocalizationLookup();
     intl_private.initializeInternalMessageLookup(() => _lookup);
