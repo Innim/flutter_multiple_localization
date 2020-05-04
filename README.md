@@ -19,6 +19,8 @@ it in you project with it's own localization files - that's problem.
 
 Exactly for that situation this package was developed.
 
+See article on Medium for more details - [Localization for Dart package](https://medium.com/@greymag/localization-for-dart-package-8ca2f56ea971).
+
 ## Usage
 
 To use this package, add `multiple_localization` as a [dependency in your pubspec.yaml file](https://flutter.dev/platform-plugins/).

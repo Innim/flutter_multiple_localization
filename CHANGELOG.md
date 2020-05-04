@@ -1,3 +1,7 @@
+## [0.1.0+4] - 2020-05-04
+
+- Add link to Medium article at README.
+
 ## [0.1.0+3] - 2020-05-01
 
 - Refactor example project. All not generated code in one file now.
