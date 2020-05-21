@@ -11,6 +11,8 @@ then you have a problem. Intl doesn't allow multiple `initializeMessages` calls.
 first one will be processed and only it's messages will be used. Every calls after the first one
 will be ignored.
 
+Also when using `Localizations.override(delegates: [SomeLocalizationsDelegate(), ...])` somewhere in widgets tree, `initializeMessages`are called every time, when that widget rebuilds. And that will lead to adding more and more lookups to `_MultipleLocalizationLookup._lookups`. To solve that use `ResetLocalizationsDelegate`, that marks `MultipleLocalizations`, and lookups list will be cleared before new lookups will be added. Note, that `ResetLocalizationsDelegate` **must** be the last in App's localizationsDelegates list.
+
 **Why do we need to have multiple arb files?**
 
 In common scenario - we don't. Just put all localization string in single file and enjoy.
