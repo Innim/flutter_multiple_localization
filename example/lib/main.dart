@@ -13,6 +13,7 @@ void main() async {
         AppLocalizations.delegate,
         PackageLocalizations.delegate,
         DefaultCupertinoLocalizations.delegate,
+        ResetLocalizationsDelegate.delegate,
       ],
       home: HomeScreen(),
     ),

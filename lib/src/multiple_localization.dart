@@ -1,4 +1,6 @@
 import 'dart:ui';
+
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
@@ -44,6 +46,7 @@ typedef InitializeMessages = Future<bool> Function(String localeName);
 ///```
 class MultipleLocalizations {
   static _MultipleLocalizationLookup _lookup;
+  static bool _pendingReset = false;
 
   static void _init() {
     assert(intl_private.messageLookup is intl_private.UninitializedLocaleData);
@@ -57,6 +60,15 @@ class MultipleLocalizations {
   static Future<T> load<T>(InitializeMessages initializeMessages, Locale locale,
       T builder(String locale),
       {bool setDefaultLocale = false}) {
+    if (_pendingReset) {
+      _pendingReset = false;
+      _lookup = null;
+      intl_private.messageLookup = intl_private.UninitializedLocaleData(
+        'initializeMessages(<locale>)',
+        null,
+      );
+    }
+
     if (_lookup == null) _init();
     final name = (locale.countryCode?.isEmpty ?? true)
         ? locale.languageCode
@@ -106,4 +118,24 @@ class _MultipleLocalizationLookup implements intl_private.MessageLookup {
 
     return ifAbsent == null ? messageStr : ifAbsent(messageStr, args);
   }
+}
+
+/// Must be the last in App's localizationsDelegates list.
+class ResetLocalizationsDelegate extends LocalizationsDelegate<Object> {
+  static const LocalizationsDelegate<Object> delegate =
+  ResetLocalizationsDelegate();
+
+  const ResetLocalizationsDelegate();
+
+  @override
+  bool isSupported(Locale locale) => true;
+
+  @override
+  Future<Object> load(Locale locale) async {
+    MultipleLocalizations._pendingReset = true;
+    return Object();
+  }
+
+  @override
+  bool shouldReload(LocalizationsDelegate<Object> old) => false;
 }
