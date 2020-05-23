@@ -17,6 +17,8 @@ In common scenario - we don't. Just put all localization string in single file a
 But if you want to add intl localization with arb files to separate package, and than use
 it in you project with it's own localization files - that's problem.
 
+`MultipleLocalizations` supports using `Localizations.override(delegates: [SomeLocalizationsDelegate(), ...])` widget, too.
+
 Exactly for that situation this package was developed.
 
 See article on Medium for more details - [Localization for Dart package](https://medium.com/@greymag/localization-for-dart-package-8ca2f56ea971).
