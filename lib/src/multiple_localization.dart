@@ -74,23 +74,14 @@ class MultipleLocalizations {
 }
 
 class _MultipleLocalizationLookup implements intl_private.MessageLookup {
-  final List<CompositeMessageLookup> _lookups = [];
+  final Map<Function, CompositeMessageLookup> _lookups = {};
 
   @override
   void addLocale(String localeName, Function findLocale) {
-    CompositeMessageLookup lookup;
-    for (final item in _lookups) {
-      if (!item.localeExists(localeName)) {
-        lookup = item;
-        break;
-      }
-    }
-
-    if (lookup == null) {
-      lookup = CompositeMessageLookup();
-      _lookups.add(lookup);
-    }
-
+    final lookup = _lookups.putIfAbsent(
+      findLocale,
+      () => CompositeMessageLookup(),
+    );
     lookup.addLocale(localeName, findLocale);
   }
 
@@ -98,7 +89,7 @@ class _MultipleLocalizationLookup implements intl_private.MessageLookup {
   String lookupMessage(String messageStr, String locale, String name,
       List<Object> args, String meaning,
       {MessageIfAbsent ifAbsent}) {
-    for (final lookup in _lookups) {
+    for (final lookup in _lookups.values) {
       final res = lookup.lookupMessage(messageStr, locale, name, args, meaning,
           ifAbsent: (s, a) => null);
       if (res != null) return res;
