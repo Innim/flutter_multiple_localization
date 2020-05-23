@@ -1,3 +1,9 @@
+## [0.1.0+5] - 2020-05-23
+
+- Fixed: Use `Localizations.override` leads to adding more and more `CompositeMessageLookup` ([#1](https://github.com/Innim/flutter_multiple_localization/issues/1)). 
+
+Thanks to [@qwert2603](https://github.com/qwert2603).
+
 ## [0.1.0+4] - 2020-05-04
 
 - Add link to Medium article at README.
