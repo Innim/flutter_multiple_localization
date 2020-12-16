@@ -55,7 +55,7 @@ class MultipleLocalizations {
   ///
   /// Use [setDefaultLocale] to set loaded locale as [Intl.defaultLocale].
   static Future<T> load<T>(InitializeMessages initializeMessages, Locale locale,
-      T builder(String locale),
+      T Function(String locale) builder,
       {bool setDefaultLocale = false}) {
     if (_lookup == null) _init();
     final name = (locale.countryCode?.isEmpty ?? true)

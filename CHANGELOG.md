@@ -1,3 +1,7 @@
+## [0.1.1] - 2020-12-16
+
+- Use `innim_lint` analysis options.
+
 ## [0.1.0+5] - 2020-05-23
 
 - Fixed: Use `Localizations.override` leads to adding more and more `CompositeMessageLookup` ([#1](https://github.com/Innim/flutter_multiple_localization/issues/1)). 
