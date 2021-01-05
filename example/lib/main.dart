@@ -5,9 +5,9 @@ import 'package:multiple_localization/multiple_localization.dart';
 import './app/l10n/messages_all.dart';
 import './package/l10n/messages_all.dart' as package;
 
-void main() async {
+void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
       supportedLocales: [Locale('en')],
       localizationsDelegates: [
         AppLocalizations.delegate,
@@ -20,6 +20,8 @@ void main() async {
 }
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final appLocalization = AppLocalizations.of(context);

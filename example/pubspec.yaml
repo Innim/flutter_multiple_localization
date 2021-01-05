@@ -10,3 +10,4 @@ dependencies:
 
 dev_dependencies:
   intl_translation: ^0.17.7
+  innim_lint: ^0.1.1
