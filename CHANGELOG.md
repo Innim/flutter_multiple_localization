@@ -1,3 +1,7 @@
+## [0.1.1+1] - 2021-02-16
+
+- Readme: add description how to override strings from a package in the project.
+
 ## [0.1.1] - 2020-12-16
 
 - Use `innim_lint` analysis options.
