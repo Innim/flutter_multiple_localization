@@ -43,7 +43,7 @@ typedef InitializeMessages = Future<bool> Function(String localeName);
 /// }
 ///```
 class MultipleLocalizations {
-  static _MultipleLocalizationLookup _lookup;
+  static _MultipleLocalizationLookup? _lookup;
 
   static void _init() {
     assert(intl_private.messageLookup is intl_private.UninitializedLocaleData);
@@ -86,13 +86,18 @@ class _MultipleLocalizationLookup implements intl_private.MessageLookup {
   }
 
   @override
-  String lookupMessage(String messageStr, String locale, String name,
-      List<Object> args, String meaning,
-      {MessageIfAbsent ifAbsent}) {
+  String? lookupMessage(String? messageStr, String? locale, String? name,
+      List<Object>? args, String? meaning,
+      {MessageIfAbsent? ifAbsent}) {
     for (final lookup in _lookups.values) {
+      var isAbsent = false;
       final res = lookup.lookupMessage(messageStr, locale, name, args, meaning,
-          ifAbsent: (s, a) => null);
-      if (res != null) return res;
+          ifAbsent: (s, a) {
+        isAbsent = true;
+        return '';
+      });
+
+      if (!isAbsent) return res;
     }
 
     return ifAbsent == null ? messageStr : ifAbsent(messageStr, args);
