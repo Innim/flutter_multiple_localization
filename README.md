@@ -53,3 +53,47 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 }
 ```
+
+### Override string from package in project
+
+If you want to override string from package localization in project
+(for example to change some labels in package widgets) - you need to
+define string with requred name in you app localization class.
+
+### Example. 
+
+If package has string `messageFromPackageForOverride`:
+
+```dart
+class PackageLocalizations {
+  ...
+
+  String get messageFromPackageForOverride =>
+        Intl.message('Package', name: 'messageFromPackageForOverride');
+```
+
+Then you need to define `messageFromPackageForOverride` in you `AppLocalizations`:
+
+```dart
+class AppLocalizations {
+  ...
+
+  String get messageFromPackageForOverride =>
+        Intl.message('App', name: 'messageFromPackageForOverride');
+```
+
+Make sure that you add the app localization delegate before
+the package localization delegate:
+
+```dart
+  ...
+  const MaterialApp(
+    localizationsDelegates: [
+      AppLocalizations.delegate,
+      PackageLocalizations.delegate,
+      ...
+    ],
+    ...
+```
+
+Now, whenever package use `messageFromPackageForOverride` you will see `App`, not `Package`.
