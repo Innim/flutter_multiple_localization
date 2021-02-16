@@ -20,7 +20,7 @@ void main() {
 }
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
     final packageLocalization = PackageLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).title),
+        title: Text(appLocalization.title),
       ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
@@ -73,11 +73,11 @@ class AppLocalizations {
       _AppLocalizationsDelegate();
 
   static AppLocalizations of(BuildContext context) =>
-      Localizations.of<AppLocalizations>(context, AppLocalizations);
+      Localizations.of<AppLocalizations>(context, AppLocalizations)!;
 
   final String locale;
 
-  AppLocalizations(this.locale) : assert(locale != null);
+  AppLocalizations(this.locale);
 
   String get title => Intl.message('Multiple localization', name: 'title');
 
@@ -115,11 +115,11 @@ class PackageLocalizations {
       _PackageLocalizationsDelegate();
 
   static PackageLocalizations of(BuildContext context) =>
-      Localizations.of<PackageLocalizations>(context, PackageLocalizations);
+      Localizations.of<PackageLocalizations>(context, PackageLocalizations)!;
 
   final String locale;
 
-  PackageLocalizations(this.locale) : assert(locale != null);
+  PackageLocalizations(this.locale);
 
   String get messageFromPackage =>
       Intl.message('Default Message from Package', name: 'messageFromPackage');
