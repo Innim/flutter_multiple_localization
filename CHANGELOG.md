@@ -1,3 +1,8 @@
+## [0.2.0-nullsafety.0] - TODO
+
+- Null-safety support.
+- **Warning!** Generation currently is not available, because of [#118](https://github.com/dart-lang/intl_translation/issues/118) in `intl_translation`.
+
 ## [0.1.1+1] - 2021-02-16
 
 - Readme: add description how to override strings from a package in the project.
