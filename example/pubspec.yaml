@@ -2,7 +2,7 @@ name: multiple_localization_example
 description: Demonstrates how to use the multiple_localization plugin.
 
 environment:
-  sdk: ">=2.12.0-0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
