@@ -1,3 +1,7 @@
+## [0.2.1] 
+
+- Allow to use async builder in `load()`. Thanks to [@Goxiaoy](https://github.com/Goxiaoy).
+
 ## [0.2.0] - 2021-03-16
 
 - Flutter 2.
