@@ -1,13 +1,13 @@
+import 'dart:async';
 import 'dart:ui';
+
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
-
 // this helper if not for direct use,
 // it's internal, but I haven't find any good way
 // to implement desired behavior
 // ignore: implementation_imports
 import 'package:intl/src/intl_helpers.dart' as intl_private;
-
 // ignore: implementation_imports
 import 'package:intl/src/intl_helpers.dart' show MessageIfAbsent;
 
@@ -55,7 +55,7 @@ class MultipleLocalizations {
   ///
   /// Use [setDefaultLocale] to set loaded locale as [Intl.defaultLocale].
   static Future<T> load<T>(InitializeMessages initializeMessages, Locale locale,
-      T Function(String locale) builder,
+      FutureOr<T> Function(String locale) builder,
       {bool setDefaultLocale = false}) {
     if (_lookup == null) _init();
     final name = (locale.countryCode?.isEmpty ?? true)
