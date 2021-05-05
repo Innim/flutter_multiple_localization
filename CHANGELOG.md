@@ -1,3 +1,7 @@
+## [0.2.2] - 2021-05-05
+
+- Fixed: Missed `scriptCode` from locale.
+
 ## [0.2.1] 
 
 - Allow to use async builder in `load()`. Thanks to [@Goxiaoy](https://github.com/Goxiaoy).

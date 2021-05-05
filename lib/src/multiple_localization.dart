@@ -58,9 +58,7 @@ class MultipleLocalizations {
       FutureOr<T> Function(String locale) builder,
       {bool setDefaultLocale = false}) {
     if (_lookup == null) _init();
-    final name = (locale.countryCode?.isEmpty ?? true)
-        ? locale.languageCode
-        : locale.toString();
+    final name = locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
 
     return initializeMessages(localeName).then((_) {
