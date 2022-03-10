@@ -4,3 +4,5 @@ analyzer:
   exclude:
     - lib/app/l10n/**
     - lib/package/l10n/**
+    - example/lib/app/l10n/**
+    - example/lib/package/l10n/**
