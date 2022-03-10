@@ -1,6 +1,8 @@
 # multiple_localization
 
 [![pub package](https://img.shields.io/pub/v/multiple_localization)](https://pub.dartlang.org/packages/multiple_localization)
+![Analyze & Test](https://github.com/Innim/flutter_multiple_localization/actions/workflows/dart.yml/badge.svg?branch=master)
+[![innim lint](https://img.shields.io/badge/style-innim_lint-40c4ff.svg)](https://pub.dev/packages/innim_lint)
 
 Support for multiple abr and messages localization files for [intl](https://pub.dev/packages/intl) package.
 
@@ -58,7 +60,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 
 If you want to override string from package localization in project
 (for example to change some labels in package widgets) - you need to
-define string with requred name in you app localization class.
+define string with required name in you app localization class.
 
 ### Example. 
 
