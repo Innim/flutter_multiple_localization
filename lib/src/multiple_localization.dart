@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 // this helper if not for direct use,
@@ -45,34 +46,64 @@ typedef InitializeMessages = Future<bool> Function(String localeName);
 class MultipleLocalizations {
   static _MultipleLocalizationLookup? _lookup;
 
-  static void _init() {
+  static _MultipleLocalizationLookup _init(String? fallbackLocale) {
     assert(intl_private.messageLookup is intl_private.UninitializedLocaleData);
-    _lookup = _MultipleLocalizationLookup();
-    intl_private.initializeInternalMessageLookup(() => _lookup);
+    final lookup = _MultipleLocalizationLookup(fallbackLocale: fallbackLocale);
+    intl_private.initializeInternalMessageLookup(() => lookup);
+    return lookup;
+  }
+
+  // only for tests!
+  @visibleForTesting
+  static void reset() {
+    _lookup = null;
+    intl_private.messageLookup = intl_private.UninitializedLocaleData(
+        'initializeMessages(<locale>)', null);
   }
 
   /// Load messages for localization and create localization instance.
   ///
   /// Use [setDefaultLocale] to set loaded locale as [Intl.defaultLocale].
+  ///
+  /// Use [fallbackLocale] to set locale which will be used if some key
+  /// not found for current locale. Only first call of [load] will set
+  /// fallback locale, make sure that your app's localization delegate
+  /// added as a first element of the delegates list.
+  /// Also pay attention that if you provide the [fallbackLocale],
+  /// than all messages will be uploaded in memory on the start of application
+  /// in addition to current locale.
   static Future<T> load<T>(InitializeMessages initializeMessages, Locale locale,
       FutureOr<T> Function(String locale) builder,
-      {bool setDefaultLocale = false}) {
-    if (_lookup == null) _init();
+      {bool setDefaultLocale = false, String? fallbackLocale}) async {
+    final lookup = _lookup ??= _init(fallbackLocale != null
+        ? Intl.canonicalizedLocale(fallbackLocale)
+        : null);
     final name = locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
 
-    return initializeMessages(localeName).then((_) {
+    final res = await initializeMessages(localeName).then((_) {
       if (setDefaultLocale) {
         Intl.defaultLocale = localeName;
       }
 
       return builder(localeName);
     });
+
+    final fallbackLocaleName = lookup.fallbackLocale;
+    if (fallbackLocaleName != null && fallbackLocaleName != localeName) {
+      // load messages for fallback locale, so it can be used if some key was not found
+      await initializeMessages(fallbackLocaleName);
+    }
+
+    return res;
   }
 }
 
 class _MultipleLocalizationLookup implements intl_private.MessageLookup {
   final Map<Function, CompositeMessageLookup> _lookups = {};
+  final String? fallbackLocale;
+
+  _MultipleLocalizationLookup({this.fallbackLocale});
 
   @override
   void addLocale(String localeName, Function findLocale) {
@@ -80,6 +111,7 @@ class _MultipleLocalizationLookup implements intl_private.MessageLookup {
       findLocale,
       () => CompositeMessageLookup(),
     );
+
     lookup.addLocale(localeName, findLocale);
   }
 
@@ -98,6 +130,12 @@ class _MultipleLocalizationLookup implements intl_private.MessageLookup {
       if (!isAbsent) return res;
     }
 
-    return ifAbsent == null ? messageStr : ifAbsent(messageStr, args);
+    // TODO: может тут Intl.canonicalizedLocale(fallbackLocale)?
+    if (locale != fallbackLocale) {
+      return lookupMessage(messageStr, fallbackLocale, name, args, meaning,
+          ifAbsent: ifAbsent);
+    } else {
+      return ifAbsent == null ? messageStr : ifAbsent(messageStr, args);
+    }
   }
 }

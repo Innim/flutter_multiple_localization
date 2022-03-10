@@ -99,3 +99,13 @@ the package localization delegate:
 ```
 
 Now, whenever package use `messageFromPackageForOverride` you will see `App`, not `Package`.
+
+### Set fallback locale
+
+Also you can specify a fallback locale when loading application localization delegate.
+Use [fallbackLocale] parameter to set locale which will be used if some key not found for current locale. 
+Only first call of [load] will set fallback locale, make sure that your app's localization delegate 
+added as a first element of the delegates list.
+
+Also pay attention that if you provide the [fallbackLocale], than all messages will be uploaded in memory
+on the start of application in addition to current locale.

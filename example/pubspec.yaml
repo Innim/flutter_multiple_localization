@@ -13,4 +13,4 @@ dependencies:
 dev_dependencies:
   # TODO: uncomment when intl_translation are updated
   # intl_translation: ^0.17.7
-  innim_lint: ^0.1.0
+  innim_lint: ^0.3.0

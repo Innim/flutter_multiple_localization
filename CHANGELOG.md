@@ -1,3 +1,7 @@
+## [0.3.0] - 2021-03-10
+
+- Support for fallback locale.
+
 ## [0.2.2] - 2021-05-05
 
 - Fixed: Missed `scriptCode` from locale.
