@@ -1,3 +1,7 @@
+## [0.4.0]
+
+- Upgrade intl dependencies to 0.18.0
+
 ## [0.3.0] - 2021-03-10
 
 - Support for fallback locale.
