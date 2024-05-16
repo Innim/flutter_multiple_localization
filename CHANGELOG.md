@@ -1,6 +1,9 @@
+- Upgrade `intl` dependencies to 0.19.0.
+- Min Dart SDK 3.0.0.
+
 ## [0.4.0]
 
-- Upgrade intl dependencies to 0.18.0. Thank to [@Goxiaoy](https://github.com/goxiaoy).
+- Upgrade `intl` dependencies to 0.18.0. Thank to [@Goxiaoy](https://github.com/goxiaoy).
 
 ## [0.3.0] - 2021-03-10
 

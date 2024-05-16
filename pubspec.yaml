@@ -6,12 +6,12 @@ repository: https://github.com/Innim/flutter_multiple_localization
 issue_tracker: https://github.com/Innim/flutter_multiple_localization/issues
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ^3.0.0
 
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.18.0
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
