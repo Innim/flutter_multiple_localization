@@ -47,7 +47,12 @@ class MultipleLocalizations {
   static _MultipleLocalizationLookup? _lookup;
 
   static _MultipleLocalizationLookup _init(String? fallbackLocale) {
-    assert(intl_private.messageLookup is intl_private.UninitializedLocaleData);
+    assert(
+      intl_private.messageLookup is intl_private.UninitializedLocaleData,
+      'Locale data already initialized. Make sure you call MultipleLocalizations.load() '
+      'for your delegate load function, instead of call initializeMessages() explicitly.',
+    );
+
     final lookup = _MultipleLocalizationLookup(fallbackLocale: fallbackLocale);
     intl_private.initializeInternalMessageLookup(() => lookup);
     return lookup;
@@ -58,7 +63,9 @@ class MultipleLocalizations {
   static void reset() {
     _lookup = null;
     intl_private.messageLookup = intl_private.UninitializedLocaleData(
-        'initializeMessages(<locale>)', null);
+      'initializeMessages(<locale>)',
+      null,
+    );
   }
 
   /// Load messages for localization and create localization instance.
@@ -72,12 +79,16 @@ class MultipleLocalizations {
   /// Also pay attention that if you provide the [fallbackLocale],
   /// than all messages will be uploaded in memory on the start of application
   /// in addition to current locale.
-  static Future<T> load<T>(InitializeMessages initializeMessages, Locale locale,
-      FutureOr<T> Function(String locale) builder,
-      {bool setDefaultLocale = false, String? fallbackLocale}) async {
-    final lookup = _lookup ??= _init(fallbackLocale != null
-        ? Intl.canonicalizedLocale(fallbackLocale)
-        : null);
+  static Future<T> load<T>(
+    InitializeMessages initializeMessages,
+    Locale locale,
+    FutureOr<T> Function(String locale) builder, {
+    bool setDefaultLocale = false,
+    String? fallbackLocale,
+  }) async {
+    final lookup = _lookup ??= _init(
+      fallbackLocale != null ? Intl.canonicalizedLocale(fallbackLocale) : null,
+    );
     final name = locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
 
@@ -109,31 +120,48 @@ class _MultipleLocalizationLookup implements intl_private.MessageLookup {
   void addLocale(String localeName, Function findLocale) {
     final lookup = _lookups.putIfAbsent(
       findLocale,
-      () => CompositeMessageLookup(),
+      CompositeMessageLookup.new,
     );
 
     lookup.addLocale(localeName, findLocale);
   }
 
   @override
-  String? lookupMessage(String? messageStr, String? locale, String? name,
-      List<Object>? args, String? meaning,
-      {MessageIfAbsent? ifAbsent}) {
+  String? lookupMessage(
+    String? messageStr,
+    String? locale,
+    String? name,
+    List<Object>? args,
+    String? meaning, {
+    MessageIfAbsent? ifAbsent,
+  }) {
     for (final lookup in _lookups.values) {
       var isAbsent = false;
-      final res = lookup.lookupMessage(messageStr, locale, name, args, meaning,
-          ifAbsent: (s, a) {
-        isAbsent = true;
-        return '';
-      });
+      final res = lookup.lookupMessage(
+        messageStr,
+        locale,
+        name,
+        args,
+        meaning,
+        ifAbsent: (s, a) {
+          isAbsent = true;
+          return '';
+        },
+      );
 
       if (!isAbsent) return res;
     }
 
     // TODO: может тут Intl.canonicalizedLocale(fallbackLocale)?
     if (locale != fallbackLocale) {
-      return lookupMessage(messageStr, fallbackLocale, name, args, meaning,
-          ifAbsent: ifAbsent);
+      return lookupMessage(
+        messageStr,
+        fallbackLocale,
+        name,
+        args,
+        meaning,
+        ifAbsent: ifAbsent,
+      );
     } else {
       return ifAbsent == null ? messageStr : ifAbsent(messageStr, args);
     }
