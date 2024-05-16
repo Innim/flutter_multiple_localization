@@ -85,7 +85,7 @@ class AppLocalizations {
       Intl.message('Default Message from App', name: 'messageFromApp');
 
   String get messageFromPackageForOverride =>
-      Intl.message('Default overridden message from Package',
+      Intl.message('This translation override package translation',
           name: 'messageFromPackageForOverride');
 }
 
