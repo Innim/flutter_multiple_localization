@@ -1,3 +1,5 @@
+## [0.5.0]
+
 - Upgrade `intl` dependencies to 0.19.0.
 - Min Dart SDK 3.0.0.
 
