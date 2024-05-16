@@ -58,7 +58,7 @@ class _AppLocalizationsDelegate
   @override
   Future<AppLocalizations> load(Locale locale) {
     return MultipleLocalizations.load(
-        initializeMessages, locale, (l) => AppLocalizations(l),
+        initializeMessages, locale, AppLocalizations.new,
         setDefaultLocale: true);
   }
 
@@ -85,7 +85,7 @@ class AppLocalizations {
       Intl.message('Default Message from App', name: 'messageFromApp');
 
   String get messageFromPackageForOverride =>
-      Intl.message('Default overrided message from Package',
+      Intl.message('Default overridden message from Package',
           name: 'messageFromPackageForOverride');
 }
 
@@ -101,7 +101,7 @@ class _PackageLocalizationsDelegate
   @override
   Future<PackageLocalizations> load(Locale locale) {
     return MultipleLocalizations.load(
-        package.initializeMessages, locale, (l) => PackageLocalizations(l));
+        package.initializeMessages, locale, PackageLocalizations.new);
   }
 
   @override
