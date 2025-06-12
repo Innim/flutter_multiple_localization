@@ -111,21 +111,21 @@ packages:
     source: hosted
     version: "0.3.1"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
-      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.19.0"
+    version: "0.20.2"
   intl_translation:
     dependency: "direct dev"
     description:
       name: intl_translation
-      sha256: b858d88b569f3c529e992ba7186aa495f3e862897df60edb932563c619943610
+      sha256: b3f1ebfab4109d1a946b45c57523628da92a0e2a2df5f2d9981ef4334fd24a26
       url: "https://pub.dev"
     source: hosted
-    version: "0.20.0"
+    version: "0.20.1"
   material_color_utilities:
     dependency: transitive
     description:
