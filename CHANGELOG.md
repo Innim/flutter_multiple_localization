@@ -1,3 +1,7 @@
+## [0.6.0]
+
+- Upgrade `intl` dependencies to 0.20.
+
 ## [0.5.0]
 
 - Upgrade `intl` dependencies to 0.19.0.
